@@ -1,0 +1,535 @@
+.mescroll {
+    width: 100%;
+    height: 90%;
+    overflow-y: auto;
+}
+
+html,
+body,
+#app {
+    /*height:100%;*/
+    /*overflow: hidden;*/
+}
+
+#upData {
+    height: calc(100vh - 8rem);
+    padding-top: 5.2rem;
+    background: #f3f4f8;
+}
+
+#upData>.swiper-wrapper {
+    height: auto;
+}
+
+.refreshtip {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    margin: 10px 0;
+    text-align: center;
+    color: #999;
+    font-size: .75rem
+}
+
+.init-loading {
+    text-align: center;
+    color: #000;
+    font-size: .75rem;
+    padding-top: .5rem;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+[v-cloak] {
+    display: none !important;
+}
+
+body {
+    background-color: #f3f4f8;
+}
+
+ul {
+    list-style-type: none
+}
+
+a {
+    text-decoration: none;
+    color: #18B4FE;
+}
+
+
+/*模拟的标题*/
+
+.header {
+    z-index: 9990;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4rem;
+    line-height: 1rem;
+    padding-top: 0.75rem;
+    text-align: center;
+    background-color: white;
+    border-bottom: 0.0625rem solid #eee;
+}
+
+.header .btn-left {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 0.75rem 0.75rem 0 0.75rem;
+}
+
+.header .btn-right {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0.75rem 0.5rem;
+}
+
+.header .tip {
+    margin-top: 0.25rem;
+    font-size: 0.75rem;
+    color: gray;
+}
+
+.head_icon {
+    position: absolute;
+    right: .8rem;
+    top: 0;
+}
+
+.head_icon .emailpic {
+    width: 1rem;
+    height: .9rem;
+    position: relative;
+}
+
+.head_icon .reddot {
+    width: .5rem;
+    height: .5rem;
+    position: absolute;
+    top: -.4rem;
+    right: -.2rem;
+}
+
+.icon-youjian {
+    font-size: 1rem;
+}
+
+
+/*菜单*/
+
+.scrollx {
+    height: 3.125rem;
+    overflow: hidden;
+    margin-top: .75rem;
+}
+
+.scrollx-content {
+    width: 100%;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+.nav {
+    font-size: 0.75rem;
+    position: relative;
+}
+
+.nav li {
+    display: inline-block;
+    padding: 0.35rem 0rem .6rem 0rem;
+    margin: 0 .6rem;
+    margin-bottom: 1.875rem;
+    /*把水平滚动条撑到外面,达到隐藏的目的*/
+    vertical-align: middle;
+}
+
+.nav li:last-child {
+    padding-right: 3.1rem;
+}
+
+.nav .active {
+    border-bottom: 0.0825rem solid #1a629d;
+    color: #1a629d;
+}
+
+
+/*列表*/
+
+
+/*展示上拉加载的数据列表*/
+
+.data-list {
+    overflow-x: hidden;
+    /*max-height: 25.8rem;*/
+}
+
+.data-list li {
+    position: relative;
+    padding: 0.625rem 0.5rem 0.625rem 7.5rem;
+    border-bottom: 0.0625rem solid #eee;
+}
+
+.data-list .pd-img {
+    position: absolute;
+    left: 1.125rem;
+    top: 1.125rem;
+    width: 5rem;
+    height: 5rem;
+}
+
+.data-list .pd-name {
+    font-size: 1rem;
+    line-height: 1.25rem;
+    height: 2.5rem;
+    overflow: hidden;
+}
+
+.data-list .pd-price {
+    margin-top: 0.5rem;
+    color: red;
+}
+
+.data-list .pd-sold {
+    font-size: 0.75rem;
+    margin-top: 0.5rem;
+    color: gray;
+}
+
+
+/*隐藏*/
+
+.hide {
+    display: none;
+}
+
+
+/*头部字体*/
+
+.header-header {
+    color: #0f0f0f;
+    /* font-weight:bold; */
+    position: relative;
+    font-size: .8rem;
+}
+
+
+/*筛选*/
+
+.screen {
+    line-height: 2.6rem;
+    font-size: 0.75rem;
+    background: #FFFFFF;
+    height: 2.6rem;
+    width: 3.125rem;
+    position: absolute;
+    top: 2.1rem;
+    right: 0rem;
+}
+
+
+/* .screen-img {
+    border-bottom: .06rem solid #e7e6eb;
+}
+ */
+
+.screen-img img {
+    transform: rotate(-180deg);
+    transition: all 0.3s;
+}
+
+
+/* 筛选内容*/
+
+.navMian {
+    width: 100%;
+    background: #FFFFFF;
+    position: fixed;
+    top: -20rem;
+    z-index: 101;
+    -webkit-transition: 0.3s;
+    transition: all 0.3s;
+}
+
+.navMian-left {
+    width: 93%;
+    margin: 0 auto;
+    height: 2.5rem;
+    font-size: 0.8rem;
+    line-height: 2.5rem;
+    background: #FFFFFF;
+    border-bottom: .06rem solid #e7e6eb;
+    color: #686f75;
+    -webkit-transition: 0.2s;
+    transition: all 0.2s;
+}
+
+#mask {
+    top: 0;
+    left: 0;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 99;
+    background: rgba(0, 0, 0, 0.7);
+    display: none;
+}
+
+.swiper-slide>span {
+    width: 100%;
+    padding: 0 .25rem;
+    box-sizing: border-box;
+    display: inline-block;
+}
+
+.swiper-slide>span img {
+    height: 11rem;
+}
+
+.swiper-slide img {
+    width: 100%;
+    border-radius: .31rem;
+    height: 5.5rem;
+}
+
+.actives {
+    color: #1a629d;
+}
+
+
+/*内容*/
+
+.contents {
+    overflow-x: hidden;
+/*     padding-top: .5rem; */
+}
+
+.contenta {
+    width: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+    padding-left: .25rem;
+    padding-top: .35rem;
+    box-sizing: border-box;
+    min-height: calc(100vh - 21rem)
+}
+
+.contenta-left {
+    float: left;
+    width: 48.6%;
+    height: 8rem;
+    background: white;
+    box-sizing: border-box;
+    margin-bottom: .4rem;
+    margin-right: .25rem;
+}
+
+.contenta-img {
+    /*   background: url(./../images/hoteln.png) no-repeat; */
+    border-radius: .25rem;
+    background-size: 100% 100%;
+    height: 5.5rem;
+    overflow: hidden;
+    position: relative;
+}
+
+
+/* 项目分类栏*/
+
+.Classification {
+    width: 100%;
+    /* height: 3.54rem; */
+    overflow: hidden;
+}
+
+.hotrzi {
+    /* float: right; */
+    width: 40%;
+    height: 1rem;
+    background: url(./../images/scene.png) no-repeat;
+    background-size: 100% 100%;
+    font-size: .55rem;
+    color: #FFFFFF;
+    text-align: center;
+    line-height: 1rem;
+    /* background: red; */
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.hotrzi-bottm {
+    margin-left: .4rem;
+    position: absolute;
+    bottom: .5rem;
+    width: 90%;
+    overflow: hidden;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #FFFFFF;
+    font-size: .55rem;
+}
+
+
+/*  标题*/
+
+.listzi {
+    width: 100%;
+    padding-left: 0.5rem;
+    line-height: 1.3rem;
+    height: 1rem;
+    color: #333;
+    font-size: .6rem;
+    font-weight: bold;
+    float: left;
+    box-sizing: border-box;
+}
+
+.listzi span {
+    font-size: .55rem;
+    color: #a6aaad;
+}
+
+.listzizi {
+    float: left;
+}
+
+.Trailer {
+    height: .75rem;
+    width: 1.75rem;
+    float: left;
+    margin: .2rem .35rem 0 0;
+}
+
+.Trailer img {
+    width: 100%;
+    height: 100%;
+}
+.more_title{
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    overflow: hidden;
+}
+.foot_btn {
+    width: 100%;
+    height: 2.6rem;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9999;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    background: white;
+}
+
+.foot_btn a {
+    flex: 1;
+    text-align: center;
+    font-size: .5rem;
+    margin-top: .35rem;
+}
+
+.foot_btn a div span {
+    display: block;
+}
+
+.live_btn .lives {
+    width: .9rem;
+    height: .9rem;
+    background: url(./../images/h_line.png) no-repeat;
+    background-size: 100% 100%;
+    margin: 0 auto;
+}
+
+.active .lives {
+    background: url(./../images/b_line.png) no-repeat;
+    background-size: 100% 100%;
+}
+
+.play_btn .plays {
+    width: .9rem;
+    height: .9rem;
+    background: url(./../images/h_play.png) no-repeat;
+    background-size: 100% 100%;
+    margin: 0 auto;
+}
+
+.active .plays {
+    background: url(./../images/b_play.png) no-repeat;
+    background-size: 100% 100%;
+}
+
+.my_btn .mys {
+    width: .9rem;
+    height: .9rem;
+    background: url(./../images/h_my.png) no-repeat;
+    background-size: 100% 100%;
+    margin: 0 auto;
+}
+
+.active .mys {
+    background: url(./../images/b_my.png) no-repeat;
+    background-size: 100% 100%;
+}
+
+.active {
+    color: #1261a4;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+
+/* alert弹框 */
+
+.popDiv {
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    width: 60vw;
+    padding: .75rem;
+    margin-left: -35vw;
+    border-radius: .1rem;
+    text-align: center;
+    color: #fff;
+    background: rgba(0, 0, 0, .5);
+    opacity: 0;
+    transition: all 1s line;
+    -moz-transition: width 1s;
+    -webkit-transition: width 1s;
+    -o-transition: width 1s;
+    z-index: 9999;
+    font-size: .85rem;
+}
+
+.loads {
+    text-align: center;
+    font-size: .45rem;
+}
+
+.swiper-aa {
+    height: 11rem;
+}
+
+
+/*高度为0*/
+
+.hidden {
+    height: 0
+}

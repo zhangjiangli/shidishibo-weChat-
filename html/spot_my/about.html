@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <script src="./../../libs/flexible.js"></script>
+    <title>关于我们</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        .wrap {
+            width: 94%;
+            margin: 0 auto;
+        }
+        
+        .heads {
+            width: 100%;
+            text-align: center;
+            line-height: 2.5rem;
+            position: fixed;
+            left: 0;
+            right: 0;
+            top: 0;
+            z-index: 9999;
+            background: #fff;
+            font-size: .8rem;
+        }
+        
+        [v-cloak] {
+            display: none;
+        }
+        
+        .icon {
+            position: absolute;
+            left: .625rem;
+        }
+        
+        .icon img {
+            height: .8rem;
+        }
+        
+        .contents {
+            margin-top: 2.5rem;
+            font-size: .8rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap" id="app" v-cloak>
+        <div class="heads">
+            <span class="icon" @click="back">
+                <img src="../../images/back.png" alt="">
+            </span>
+            <span>关于我们</span>
+        </div>
+        <div class="contents">
+
+        </div>
+    </div>
+</body>
+<script src="./../../libs/jquery-1.11.1.js"></script>
+<script src="./../../js/common.js"></script>
+<script src="../../js/vue.js"></script>
+<script>
+    var tipiv = new Vue({
+        el: '#app',
+        data: {
+            challenge: '',
+        },
+        methods: {
+            back: function() {
+                window.history.go(-1)
+            },
+        },
+        mounted: function() {
+            $.post(common.urls + '/publicHelp/detail.do?title=关于我们', null, function(conetnt) {
+                var  obj = JSON.parse(conetnt);
+                console.log(obj.content);
+              $(".contents").html(obj.content)
+            });
+
+
+
+        },
+
+    })
+</script>
+
+</html>

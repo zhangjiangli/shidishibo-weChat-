@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="stylesheet" href="./../../css/swiper-3.3.1.min.css">
+    <link rel="stylesheet" href="./../../css/myplay.css">
+    <script type="text/javascript" src="./../../libs/flexible.js"></script>
+    <title>视频</title>
+</head>
+
+<body>
+    <div id="app" v-cloak>
+        <!--标题-->
+        <div class="header">
+            <div class="header-header">
+                <span>视频</span>
+            </div>
+
+            <!--菜单 需加上mescroll-touch-x,原因: http://www.mescroll.com/qa.html#q10 -->
+            <div class="scrollx mescroll-touch-x">
+                <div id="scrollxContent" class="scrollx-content">
+                    <ul id="nav" class="nav">
+
+                        <li :i="index" v-for='(item,index) in challenge' :class="{active : index==0}">{{item.name}}</li>
+                        <!-- 加多一个导航为了最后一个能显现-->
+                        <!-- <li>蔷薇国际</li> -->
+                    </ul>
+                    <div class="screen screentrue">
+                        <div class="screen-img">
+                            筛选
+                            <img src="./../../images/jiantou.png">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div id="mask"></div>
+        <div class="navMian">
+            <div class="navMian-left" v-for='(items,index) in business' :class="{actives : index==indexbusiCheck}" @click='bus(index,items)'>{{items.name}}</div>
+            <!--  <div class="navMian-left">工程现场</div>
+            <div class="navMian-left">收楼现场</div> -->
+        </div>
+
+
+        <!-- 上拉刷新 -->
+        <div id="upData" class="swiper-container" style="margin-top: -15px;">
+            <div class="refreshtip" v-show='!upHtml'>下拉可以刷新</div>
+            <div class="swiper-wrapper" id="rapp">
+
+                <!-- 轮播 -->
+                <div class="swiper-slide" id="slide">
+                    <div class="init-loading list-group-item text-center" v-show='upHtml'>加载中..</div>
+                    <div id="swiper" class="swiper-container">
+                        <div id="swiperWrapper" class="swiper-wrapper">
+
+                            <!--首页-->
+                            <div id="mescroll0" class="swiper-slide mescroll" v-for="(challenge,index) in challenge" :class="{hidden:indexTapCheck!=index}">
+                                <ul id="dataList0" class="data-list">
+                                    <div class="contents">
+                                        <!-- <div class="swiper-aa">
+
+                                            <div class="swiper-pagination"></div>
+                                        </div> -->
+                                        <!--内容-->
+                                        <div class="contenta">
+                                            <!-- 1 -->
+
+                                            <div class='vd_left' v-for='tems in challenge.list' @click='nick(tems)'>
+                                                <div class='top'>
+                                                    <!--   <video controls class='vo' poster='../../images/hoteln.png'>
+                                                    <source src='../../libs/Intermission-Walk-in.ogv'></source>
+                                                    <source src='../../videos/Intermission-Walk-in_512kb.mp4'></source>
+                                                </video>   -->
+                                                    <img :src="tems.photoUrl" alt="">
+                                                    <span class='scene'>{{tems.serviceName}}</span>
+                                                    <span class='name'>{{tems.nickName}}</span>
+                                                    <span class='time'>{{tems.createTime}}</span>
+                                                </div>
+                                                <div class='down'>
+                                                    <span class="selfs">{{tems.title}}</span>
+                                                    <span class='down_name'>{{tems.projectName}}</span>
+                                                    <span class='play_i'>
+                                                    <img src='../../images/plays.png' alt=''> {{tems.watchCount}}</span>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                </ul>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="loads">{{upText}}</div>
+                    </div>
+                  
+                </div>
+            </div>
+
+        </div>
+        <!-- 底部导航 -->
+        <div class="foot_btn">
+            <a href="../spot_live/index.html">
+                <div class="live_btn">
+                    <!-- <img src="../../images/b_line.png" alt=""> -->
+                    <div class="lives"></div>
+                    <span>在线直播</span>
+                </div>
+            </a>
+            <a href="../spotvideo/myplay.html">
+                <div class="play_btn active">
+                    <!-- <img src="../../images/h_play.png" alt="" class="a"> -->
+                    <div class="plays"></div>
+                    <span>视频</span>
+                </div>
+            </a>
+            <a href="../spot_my/personal.html">
+                <div class="my_btn">
+                    <!-- <img src="../../images/h_my.png" alt=""> -->
+                    <div class="mys"></div>
+                    <span>我的</span>
+                </div>
+            </a>
+        </div>
+        <script src="./../../libs/swiper-3.3.1.min.js" type="text/javascript" charset="utf-8"></script>
+        <!--mescroll本身不依赖jq,这里为了模拟发送ajax请求-->
+        <script type="text/javascript" src="./../../libs/zepto_1.1.3.js"></script>
+        <script type="text/javascript" src="./../../js/common.js"></script>
+        <script type="text/javascript" src="./../../js/myplay.js"></script>
+        <script src="../../js/vue.js"></script>
+
+</body>
+
+</html>

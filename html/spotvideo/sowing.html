@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>视频详情</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .heads {
+    text-align: center;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2.2rem;
+    line-height: 2.2rem;
+    padding: 0 .75rem;
+    position: relative;
+    box-sizing: border-box;
+}
+
+.heads img {
+    height: .8rem;
+    position: absolute;
+    left: 0.75rem;;
+    top: .8rem;
+}
+video::-internal-media-controls-download-button {
+	display:none;
+}
+video::-webkit-media-controls-enclosure {
+	overflow:hidden;
+}
+video::-webkit-media-controls-panel {
+	width: calc(100% + 30px); 
+}
+      
+    </style>
+</head>
+</head>
+	<style>
+			
+	</style>
+<body>
+
+<body>
+    <div id="app">
+            <div class="heads">
+                    <span class="icon">
+                        <img src="../../images/back.png" alt="" class="back">
+                    </span>
+                    <span>视频详情</span>
+                </div>
+        
+    </div>
+		<video id="video" style="width:100%; height:340px;" controls autoplay="autoplay">
+			
+		</video>
+
+    <script src="./../../libs/flexible.js"></script>
+    <script src="./../../libs/jquery-1.11.1.js"></script>
+    <script src="../../js/common.js"></script>
+    <script src="../../js/vue.js"></script>
+    <script src="../../js/h5connect.js"></script>
+
+</body>
+<script>
+  
+      $('.back').on('click',function(){
+        window.history.back(-1)
+      })
+    
+    function getQueryString(name) {
+        var result = window.location.search.match(new RegExp("[\?\&]" + name + "=([^\&]+)", "i"));
+        if (result == null || result.length < 1) {
+            return "";
+        }
+        return result[1];
+    }
+
+    var videoUrl = getQueryString("videoUrl");
+	$("#video").html('<source src="'+videoUrl+'"  type="video/mp4">');
+</script>
+
+</html>

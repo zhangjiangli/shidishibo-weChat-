@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="./../../libs/flexible.js"></script>
+    <title>更多设置</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            background: #f3f4f8;
+            overflow-x: hidden;
+        }
+        
+        .wrap {
+            /* width: 94%; */
+            margin: 0 auto;
+        }
+        
+        .heads {
+            width: 100%;
+            height: 2.5rem;
+            text-align: center;
+            line-height: 2.5rem;
+            position: fixed;
+            left: 0;
+            right: 0;
+            top: 0;
+            z-index: 9999;
+            background: #fff;
+            font-size: .9rem;
+        }
+        
+        .heads span {
+            font-size: .85rem;
+            /* font-weight: bold; */
+        }
+        
+        .icon {
+            position: absolute;
+            left: .625rem;
+        }
+        
+        .icon img {
+            height: .8rem;
+        }
+        
+        .contents {
+            width: 100%;
+            margin-top: 2.5rem;
+            background: white;
+        }
+        
+        .explain {
+            width: 92%;
+            margin: 0 auto;
+            height: 2.5rem;
+            line-height: 2.5rem;
+            box-sizing: border-box;
+            border-bottom: .09rem solid #f3f4f8;
+            font-size: .8rem;
+            position: relative;
+        }
+        
+        .explain img {
+            /* width: .6rem; */
+            height: .8rem;
+            position: absolute;
+            right: 0;
+            top: .8rem;
+        }
+        
+        .edition {
+            position: absolute;
+            right: 0;
+            font-size: .65rem;
+            color: #999;
+        }
+        
+        .sign_out {
+            width: 100%;
+            height: 2.5rem;
+            line-height: 2.5rem;
+            background: white;
+            margin-top: 1.7rem;
+            font-size: .75rem;
+            color: #ef5757;
+            padding: 0 4%;
+            letter-spacing: .1rem;
+            box-sizing: border-box;
+        }
+        /* alert弹框 */
+        
+        .popDiv {
+            position: fixed;
+            top: 40%;
+            left: 50%;
+            width: 60vw;
+            padding: .75rem;
+            margin-left: -35vw;
+            border-radius: .1rem;
+            text-align: center;
+            color: #fff;
+            background: rgba(0, 0, 0, .5);
+            opacity: 0;
+            transition: all 1s line;
+            -moz-transition: width 1s;
+            -webkit-transition: width 1s;
+            -o-transition: width 1s;
+            z-index: 9999;
+            font-size: .85rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap" id="app" v-cloak>
+        <div class="heads">
+            <span class="icon">
+                <img src="../../images/back.png" alt="" @click='back'>
+            </span>
+            <span>更多设置</span>
+        </div>
+        <div class="contents">
+            <div class="explain" @click='plain'>
+                <span>使用说明</span>
+                <img src="../../images/you.png" alt="">
+            </div>
+            <div class="explain" @click='about'>
+                <span>关于我们</span>
+                <img src="../../images/you.png" alt="">
+            </div>
+            <div class="explain">
+                <span>版本信息</span>
+                <span class="edition">1.0版本</span>
+            </div>
+
+        </div>
+
+        <div class="sign_out" @click='signout'>退出登录</div>
+    </div>
+</body>
+<script src="./../../libs/jquery-1.11.1.js"></script>
+<script src="./../../js/common.js"></script>
+<script src="../../js/vue.js"></script>
+<script>
+    var tipiv = new Vue({
+        el: '#app',
+        data: {
+            challenge: '',
+        },
+        methods: {
+            back: function() {
+                window.history.go(-1)
+            },
+            plain: function() {
+                location.href = '../spot_my/use.html'
+            },
+            about: function() {
+                location.href = '../spot_my/about.html'
+            },
+            signout: function() {
+                // js浏览器关闭
+                document.write("Name: " + navigator.appName);
+                var browserName = navigator.appName; //获取浏览器名称  
+                if (browserName == "Netscape") {
+                    // 初始化对象里面的属性 ,删除本地储存
+                    localStorage.removeItem('userInfo')
+                    location.href = '../spot_live/signin.html'
+
+                    function closeme() {
+                        window.open('', '_parent', '');
+                        window.close();
+                    }
+                } else {
+                    if (browserName == "Microsoft Internet Explorer") {
+                        function closynoshowsme() {
+                            window.opener = "test";
+                            window.close();
+                        }
+                    }
+                }
+                // 微信接口关闭
+                // WeixinJSBridge.invoke('closeWindow', {}, function(res) {
+                //     console.log(res.errMsg)
+                // });
+            },
+            cancels: function() {
+                if (this.isShow = !this.isShow) {
+                    isShow: true
+                }
+            },
+
+        },
+        mounted: function() {
+
+        }
+
+    })
+</script>
+
+</html>

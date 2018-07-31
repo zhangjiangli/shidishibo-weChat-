@@ -1,0 +1,360 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #f3f4f8;
+    overflow-x: hidden;
+}
+
+[v-cloak] {
+    display: none !important;
+}
+
+.videoplay {
+    width: 100%;
+    overflow: hidden;
+}
+
+.heads {
+    text-align: center;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2.2rem;
+    line-height: 2.2rem;
+    padding:  0  .75rem;
+    position: relative;
+    box-sizing: border-box;
+}
+
+.heads img {
+    height: .8rem;
+    position: absolute;
+    left: 0.75rem;;
+    top: .8rem;
+}
+ 
+
+.play_vo {
+    width: 100%;
+    background: white;
+}
+
+.video-js {
+    width: 100%;
+}
+
+.titles {
+    width: 100%;
+    /* height: 5rem; */
+    box-sizing: border-box;
+    padding: .5rem .5rem 0;
+    background: white;
+}
+
+.titles span:nth-of-type(1) {
+    font-size: .9rem;
+    font-weight: bold;
+    display: block;
+    color: black;
+}
+
+.play_i img {
+    width: .6rem;
+    height: .5rem;
+}
+
+.play_time {
+    position: absolute;
+    right: .625rem;
+}
+
+.titles>span {
+    font-size: .65rem;
+    color: #999;
+}
+
+.user_name {
+    width: 100%;
+   /*  height: 2.1rem;
+    line-height: 2.1rem; */
+    /* background: wheat; */
+    padding: .6rem;
+    font-size: .63rem;
+    box-sizing: border-box;
+    position: relative;
+    background: white;
+}
+
+.user_name img {
+    width: 1.25rem;
+    height: 1.25rem;
+    border-radius: 50%;
+}
+.user_name .number{
+    position: absolute;
+    right: 3%;
+    color: #999;
+    top: 0.8rem;
+}
+
+.user_name .name {
+    position: absolute;
+    
+    left: 2.5rem;
+    line-height: 1.25rem;
+}
+
+.more {
+    width: 100%;
+    background: white;
+    margin-top: .2rem;
+}
+
+.more a {
+    text-decoration: none;
+    color: #000;
+}
+
+.more_title {
+    width: 100%;
+    height: 2.2rem;
+    border-bottom: .05rem solid #f3f4f8;
+    line-height: 2.2rem;
+    padding: 0 .6rem;
+    box-sizing: border-box;
+}
+
+.mores img {
+    width: .5rem;
+    height: .6rem;
+}
+
+.more_name {
+    font-weight: bold;
+    font-size: .8rem;
+}
+
+.mores {
+    color: #999;
+    font-size: .8rem;
+    float: right;
+}
+
+.play_de {
+    width: 100%;
+    height: 4rem;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    border-bottom: .05rem solid #f3f4f8;
+}
+
+.play_pic {
+    flex: 1;
+    padding: .4rem .6rem;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.play_pic img {
+    width: 5.38rem;
+    height: 3.25rem;
+    border-radius: .15rem;
+}
+
+.play_pic .time {
+    position: absolute;
+    bottom: .4rem;
+    left: .8rem;
+    color: white;
+    font-size: .5rem;
+}
+
+.play_con {
+    flex: 2;
+    padding: .4rem;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.play_con .title {
+    display: block;
+    font-size: .7rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.play_con .scene {
+    background: #f5ad55;
+    color: white;
+    font-size: .55rem;
+    padding: .05rem .15rem;
+    border-radius: .15rem;
+}
+
+.number img {
+    width: .6rem;
+    height: .5rem;
+}
+
+.play_con .number {
+    font-size: .6rem;
+    color: rgb(144, 148, 153)
+}
+
+.play_con .name {
+    font-size: .6rem;
+    color: rgb(144, 148, 153);
+    /* margin-left: 4.5rem; */
+    position: absolute;
+    right: .6rem;
+    bottom: .4rem;
+}
+
+#my-video {
+    height: 11rem
+}
+
+.vo {
+    width: 100%;
+}
+/* 遮罩直播结束 */
+
+.wrapss {
+    width: 100%;
+    height: 11rem;
+    position: fixed;
+    top: 0;
+    background: url('./../images/live_bg.jpg') no-repeat;
+    background-size: 100% 100%;
+    text-align: center;
+    display: none;
+}
+
+.see {
+    width: 100%;
+    color: #ffffff;
+    position: absolute;
+    top: 3rem;
+}
+
+.see img {
+    width: 1.3rem;
+}
+
+.see .btn {
+    background: none;
+    width: 4.5rem;
+    height: 1.4rem;
+    color: white;
+    border-radius: .38rem;
+    outline: none;
+    font-size: .7rem;
+    border: .03rem solid;
+    display: inline-block;
+    line-height: 1.4rem;
+    margin-top: .3rem
+}
+
+
+/* alert弹框 */
+
+.popDiv {
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    width: 60vw;
+    padding: .75rem;
+    margin-left: -35vw;
+    border-radius: .1rem;
+    text-align: center;
+    color: #fff;
+    background: rgba(0, 0, 0, .5);
+    opacity: 0;
+    transition: all 1s line;
+    -moz-transition: width 1s;
+    -webkit-transition: width 1s;
+    -o-transition: width 1s;
+    z-index: 9999;
+    font-size: .85rem;
+}
+.partition {
+   width: 100%;
+   white-space:nowrap;
+   margin-top: .5rem;
+ 
+}
+/* .partition-nav{
+    padding: .5rem 0;
+} */
+.partition-nav li{
+    display: inline;
+    font-size: .65rem;
+    font-weight: bold;
+    padding: 0.6rem .7rem; 
+   
+}
+.datas{
+    width: 100%;
+    min-height: 10rem;
+    background: #fff; 
+}
+.partition-nav .active{
+    background: #fff
+}
+.datas .numbers{
+    font-size: .75rem;
+    font-weight: bold; 
+    padding: 0.6rem .7rem; 
+}
+.number_list{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    padding:0 .7rem; 
+    font-size: .65rem;
+}
+.number_list div{
+    flex: 1
+}
+.number_list div ul li{
+    list-style: none;
+    padding: 0.3rem 0; 
+}
+
+
+
+/*菜单*/
+
+.scrollx {
+    height: 2rem;
+    overflow: hidden;
+ 
+}
+
+.scrollx-content {
+    width: 100%;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+.nav {
+    font-size: 0.75rem;
+    position: relative;
+}
+
+.nav li {
+    display: inline-block;
+   /*  padding: 0.35rem 0rem .6rem 0rem; */
+  /*   margin: 0 .6rem; */
+    margin-bottom: 1.875rem;
+    /*把水平滚动条撑到外面,达到隐藏的目的*/
+    vertical-align: middle;
+}
+ 
+ 

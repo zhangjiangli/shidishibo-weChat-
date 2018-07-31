@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../../js/skin/layer.css">
+    <script src="./../../libs/flexible.js"></script>
+    <title>意见反馈</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        .wrap {
+            width: 94%;
+            margin: 0 auto;
+        }
+        
+        .heads {
+            width: 100%;
+            height: 2.5rem;
+            text-align: center;
+            line-height: 2.5rem;
+            position: fixed;
+            left: 0;
+            right: 0;
+            top: 0;
+            z-index: 9999;
+            background: #fff;
+            font-size: .9rem;
+        }
+        
+        .icon {
+            position: absolute;
+            left: .625rem;
+        }
+        
+        .icon img {
+            /* width: .55rem; */
+            height: .8rem;
+        }
+        
+        .contents {
+            margin-top: 2.5rem;
+            box-sizing: border-box;
+            width: 100%;
+        }
+        
+        #contactus {
+            width: 100%;
+            border-radius: 6px;
+            resize: none;
+            border: none;
+            background: #f6f7fb;
+            height: 100%;
+            padding: .55rem;
+            box-sizing: border-box;
+            outline: none;
+            font-size: .8rem;
+            color: #cccccc;
+        }
+        
+        .btn {
+            background: #1261a4;
+            color: white;
+            height: 2.25rem;
+            line-height: 2.25rem;
+            text-align: center;
+            margin-top: 4rem;
+            border-radius: .38rem;
+            font-size: .75rem;
+        }
+        
+        #contactus:focus {
+            color: black;
+        }
+        
+        [v-cloak] {
+            display: none !important;
+        }
+      
+    </style>
+</head>
+
+<body>
+    <div class="wrap" id="app" v-cloak>
+        <div class="heads">
+            <span class="icon" @click="goBack">
+                <img src="../../images/back.png" alt="">
+            </span>
+            <span>意见反馈</span>
+        </div>
+        <div class="contents">
+            <textarea cols="50" rows="10" id="contactus" name="contactus" placeholder="请填写你的意见"></textarea>
+        </div>
+        <div class="btn" @click='submit'>提交</div>
+    </div>
+</body>
+<script src="./../../libs/jquery-1.11.1.js"></script>
+<script src="../../js/layer.min.js"></script>
+<script src="./../../js/common.js"></script>
+<script src="../../js/vue.js"></script>
+<script>
+    var tipiv = new Vue({
+        el: '#app',
+        data: {
+            challenge: '',
+            contactus: ''
+        },
+        methods: {
+            goBack: function() {
+                window.history.go(-1)
+            },
+            submit: function() {
+                if (common.replace($("#contactus").val()) == '') {
+                    layer.msg('输入不能为空')
+                    return
+                }
+                $.ajax({
+                    url: common.urls + '/opinion/save.do',
+                    dataType: 'json',
+                    type: 'post',
+                    data: {
+                        userId: common.data.info.id,
+                        content: $("#contactus").val()
+                    },
+                    success: function(data) {
+                        tipiv.challenge = data.dataInfo.info
+                        layer.msg(data.msg)
+                        setTimeout(function() {
+                         location.href = '../spot_my/personal.html'
+                        }, 3000)
+                    },
+                    error: function(data) {
+
+                    }
+                })
+            }
+        },
+
+    })
+</script>
+
+
+</html>

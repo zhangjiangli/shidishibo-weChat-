@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="stylesheet" href="./../../css/swiper-3.3.1.min.css">
+    <link rel="stylesheet" href="./../../css/index.css">
+    <script type="text/javascript" src="./../../libs/flexible.js"></script>
+    <title>实地直播</title>
+    <style>
+        .swiper-pagination {
+            position: absolute;
+            top: 9.5rem;
+        }
+
+        .swiper-pagination-bullet-active {
+            opacity: 1 !important;
+            background: #fff !important;
+        }
+
+        .swiper-pagination-bullet {
+            width: 6px;
+            height: 6px;
+            display: inline-block;
+            border-radius: 0 !important;
+            background: #fff;
+            opacity: .4;
+        }
+
+        .swiper-container-horizontal>.swiper-pagination-bullets .swiper-pagination-bullet {
+            margin: 0 3px;
+        }
+        .swiper-container-horizontal>.swiper-pagination-bullets{
+            height: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app" v-cloak>
+        <!--标题-->
+        <div class="header">
+            <div>
+                <div class="header-header">
+                    <span>在线直播</span>
+                    <span class="head_icon" @click='message'>
+                        <img class="emailpic" src="../../images/message.png" alt="">
+                        <img class="reddot" src="../../images/reddot.png" alt="" v-show='show.isReddot==1'>
+                    </span>
+
+                </div>
+
+            </div>
+            <!--菜单 需加上mescroll-touch-x,原因: http://www.mescroll.com/qa.html#q10 -->
+            <div class="scrollx mescroll-touch-x">
+                <div id="scrollxContent" class="scrollx-content">
+                    <ul id="nav" class="nav">
+                        <li :i="index" v-for='(item,index) in project' :class="{active : index==0}">{{item.name}}</li>
+
+                        <!-- 加多一个导航为了最后一个能显现-->
+                        <!-- <li>蔷薇国际</li> -->
+                    </ul>
+                    <div class="screen screentrue" id="screentrue">
+                        <div class="screen-img">
+                            筛选
+                            <img src="./../../images/jiantou.png">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div id="mask"></div>
+        <div class="navMian">
+            <div class="navMian-left" v-for='(items,index) in business' :class="{actives : index==indexbusiCheck}" @click='bus(index,items)'>{{items.name}}</div>
+            <!-- <div class="navMian-left">工程现场</div>
+            <div class="navMian-left">收楼现场</div> -->
+        </div>
+
+        <!--上拉刷新-->
+        <div class="swiper-container" id="upData" style="margin-top: -5px;">
+            <div class="refreshtip" v-show='!upHtml'>下拉可以刷新</div>
+            <div class="swiper-wrapper">
+                <!--轮播-->
+                <div class="swiper-slide" id="slide">
+                    <div class="init-loading list-group-item text-center" v-show='upHtml'>加载中..</div>
+                    <div id="swiper" class="swiper-container">
+                        <div id="swiperWrapper" class="swiper-wrapper">
+                            <!--首页-->
+                            <div id="mescroll0" class="swiper-slide mescroll" v-for="(project,index) in project" :class="{hidden:indexTapCheck!=index}">
+                                <ul id="dataList0" class="data-list">
+                                    <div class="contents">
+                                        <div class="swiper-aa">
+                                            <div class="swiper-wrapper">
+                                                <div class="swiper-slide" v-for='item in challenge' @click='pics(item)'>
+                                                    <span>
+                                                        <img :src="item.photoUrl" />
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="swiper-pagination"></div>
+                                        </div>
+                                        <!--内容-->
+                                        <div class="contenta">
+                                            <!--	1-->
+                                            <div class="contenta-left" v-for='broad in project.list' @click='loads(broad)'>
+                                                <div class="contenta-img">
+                                                    <img :src="broad.photoUrl" alt="">
+                                                    <div class="Classification">
+                                                        <div class="hotrzi">
+                                                            {{broad.serviceName}}
+                                                        </div>
+                                                    </div>
+                                                    <div class="hotrzi-bottm" v-if="broad.status ==0">
+                                                        {{ broad.liveDate}}开播
+                                                    </div>
+                                                    <div class="hotrzi-bottm" v-else-if="broad.status ==1">
+                                                        {{ broad.onlineCount}}在线观看
+                                                    </div>
+                                                </div>
+                                                <div class="listzi">
+                                                    <div class="Trailer" v-show="broad.status ==0">
+                                                        <img src="../../images/trailer.png" alt="">
+                                                    </div>
+                                                    <div class="more_title">{{broad.title}}</div>
+
+                                                </div>
+                                                <div class="listzi">
+                                                    <span>{{broad.projectName}}</span>
+                                                    <span style="margin-left: 0.6rem;">{{broad.areaName}}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                </ul>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="loads">{{upText}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 底部导航 -->
+        <div class="foot_btn">
+            <a href="../spot_live/index.html">
+                <div class="live_btn active">
+                    <!-- <img src="../../images/b_line.png" alt=""> -->
+                    <div class="lives"></div>
+                    <span>在线直播</span>
+                </div>
+            </a>
+            <a href="../../html/spotvideo/myplay.html">
+                <div class="play_btn">
+                    <!-- <img src="../../images/h_play.png" alt="" class="a"> -->
+                    <div class="plays"></div>
+                    <span>视频</span>
+                </div>
+            </a>
+            <a href="../../html/spot_my/personal.html">
+                <div class="my_btn">
+                    <!-- <img src="../../images/h_my.png" alt=""> -->
+                    <div class="mys"></div>
+                    <span>我的</span>
+                </div>
+            </a>
+
+        </div>
+    </div>
+</body>
+
+<script src="./../../libs/swiper-3.3.1.min.js" type="text/javascript" charset="utf-8"></script>
+<!--mescroll本身不依赖jq,这里为了模拟发送ajax请求-->
+<script type="text/javascript" src="./../../libs/zepto_1.1.3.js"></script>
+<script type="text/javascript" src="./../../js/common.js"></script>
+
+<script type="text/javascript" charset="utf-8"></script>
+<script src="../../js/vue.js"></script>
+<script type="text/javascript" src="./../../js/index.js"></script>
+
+</html>

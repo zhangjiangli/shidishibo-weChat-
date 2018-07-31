@@ -1,0 +1,239 @@
+{
+  "news.html": {
+    "resources": [
+      "libs/flexible.js",
+      "css/news.css"
+    ],
+    "refer": []
+  },
+  "index.html": {
+    "resources": [
+      "libs/video.min.js",
+      "m.png",
+      "css/video-js.css"
+    ],
+    "refer": []
+  },
+  "videoplay.html": {
+    "resources": [
+      "css/videoplay.css",
+      "libs/video.min.js",
+      "libs/jquery-1.11.1.js",
+      "libs/flexible.js",
+      "js/my.js",
+      "m.png",
+      "css/video-js.css"
+    ],
+    "refer": []
+  },
+  "html/play/more.html": {
+    "resources": [
+      "libs/flexible.js",
+      "images/hoteln.png",
+      "css/more.css",
+      "html/live/videoplay.html",
+      "libs/jquery-1.11.1.js"
+    ],
+    "refer": []
+  },
+  "html/live/vi_details.html": {
+    "resources": [
+      "libs/jquery-1.11.1.js",
+      "images/fish.jpg",
+      "libs/flexible.js",
+      "js/my.js",
+      "libs/Intermission-Walk-in.ogv",
+      "css/vi_details.css"
+    ],
+    "refer": []
+  },
+  "html/live/videoplay.html": {
+    "resources": [
+      "css/videoplay.css",
+      "libs/video.min.js",
+      "html/live/m.png",
+      "css/video-js.css",
+      "libs/jquery-1.11.1.js",
+      "images/fish.jpg",
+      "html/play/more.html"
+    ],
+    "refer": []
+  },
+  "html/live/index.html": {
+    "resources": [
+      "css/index.css",
+      "images/hoteln.png",
+      "libs/flexible(1).js",
+      "libs/zepto_1.1.3.js",
+      "libs/swiper-3.3.1.min.js",
+      "images/hotel.png",
+      "images/jiantou.png",
+      "js/index.js",
+      "css/swiper-3.3.1.min.css",
+      "js/common.js",
+      "html/play/myplay.html",
+      "images/fish.jpg"
+    ],
+    "refer": []
+  },
+  "html/live/detailed.html": {
+    "resources": [
+      "images/fish.jpg",
+      "libs/flexible.js",
+      "css/detailed.css"
+    ],
+    "refer": []
+  },
+  "html/play/myplay.html": {
+    "resources": [
+      "images/hoteln.png",
+      "libs/flexible(1).js",
+      "libs/zepto_1.1.3.js",
+      "libs/swiper-3.3.1.min.js",
+      "css/myplay.css",
+      "images/jiantou.png",
+      "js/index.js",
+      "css/swiper-3.3.1.min.css",
+      "js/common.js",
+      "html/live/index.html",
+      "html/my/my.html"
+    ],
+    "refer": []
+  },
+  "html/my/my.html": {
+    "resources": [
+      "libs/jquery-1.11.1.js",
+      "images/fish.jpg",
+      "css/my.css",
+      "libs/flexible.js",
+      "html/play/myplay.html",
+      "html/live/index.html"
+    ],
+    "refer": [
+      "html/play/myplay.html"
+    ]
+  },
+  "html/spot_my/my_center.html": {
+    "resources": [
+      "images/you.png",
+      "html/spot_my/set_up.html",
+      "libs/jquery-1.11.1.js",
+      "css/my.css"
+    ],
+    "refer": [
+      "html/spot_my/set_up.html"
+    ]
+  },
+  "html/spot_live/index.html": {
+    "resources": [
+      "html/spot_my/my_center.html",
+      "images/new.png",
+      "images/h_my.png",
+      "images/hoteln.png",
+      "libs/swiper-3.3.1.min.js",
+      "images/hotel.png",
+      "images/b_line.png",
+      "css/index.css",
+      "images/fish.jpg",
+      "libs/flexible.js",
+      "js/common.js",
+      "libs/zepto_1.1.3.js",
+      "images/h_line.png",
+      "images/h_play.png",
+      "images/jiantou.png",
+      "images/scene.png",
+      "css/swiper-3.3.1.min.css",
+      "js/index.js",
+      "images/b_my.png",
+      "images/reddot.png",
+      "images/message.png",
+      "images/trailer.png",
+      "html/spotvideo/myplay.html"
+    ],
+    "refer": [
+      "html/spot_my/my_center.html",
+      "html/spotvideo/play.html",
+      "html/spotvideo/myplay.html",
+      "html/spot_my/personal.html"
+    ]
+  },
+  "html/spot_live/playvideo.html": {
+    "resources": [
+      "images/stop.png",
+      "libs/jquery-1.11.1.js",
+      "images/fish.jpg",
+      "libs/flexible.js",
+      "images/play.png",
+      "images/screen.png",
+      "libs/Intermission-Walk-in.ogv",
+      "images/backwrite.png",
+      "css/playvideo.css",
+      "images/plays.png"
+    ],
+    "refer": []
+  },
+  "html/spotvideo/myplay.html": {
+    "resources": [
+      "html/spot_live/index.html",
+      "libs/Intermission-Walk-in.ogv"
+    ],
+    "refer": [
+      "html/spot_live/index.html",
+      "html/spot_my/personal.html",
+      "html/spotvideo/play.html"
+    ]
+  },
+  "html/spot_my/personal.html": {
+    "refer": [
+      "html/spot_my/setup.html",
+      "html/spot_live/index.html",
+      "html/spot_my/feedback .html",
+      "html/spotvideo/myplay.html"
+    ],
+    "resources": []
+  },
+  "html/spot_live/tourist.html": {
+    "refer": [
+      "html/spot_live/index.html"
+    ],
+    "resources": []
+  },
+  "html/spot_my/setup.html": {
+    "refer": [
+      "html/spot_live/signin.html",
+      "html/spot_my/about.html",
+      "html/spot_my/use.html"
+    ],
+    "resources": []
+  },
+  "html/spot_live/signin.html": {
+    "refer": [
+      "html/spot_live/tourist.html"
+    ],
+    "resources": []
+  },
+  "html/spot_my/about.html": {
+    "refer": [
+      "html/spot_my/setup.html"
+    ],
+    "resources": []
+  },
+  "html/spot_my/feedback .html": {
+    "refer": [
+      "html/spot_my/personal.html"
+    ],
+    "resources": []
+  },
+  "html/spot_my/use.html": {
+    "refer": [
+      "html/spot_my/setup.html"
+    ],
+    "resources": []
+  },
+  "html/spotvideo/play.html": {
+    "refer": [
+      "html/spotvideo/myplay.html"
+    ],
+    "resources": []
+  }
+}

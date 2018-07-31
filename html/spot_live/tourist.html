@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <script src="./../../libs/flexible.js"></script>
+    <title>登录</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        .wrap {
+            width: 100%;
+            padding: 0 3%;
+            box-sizing: border-box;
+        }
+        
+        .wrap .heads {
+            width: 100%;
+            text-align: center;
+            padding: .75rem 0;
+            position: relative;
+        }
+        
+        .wrap .heads img {
+            width: .5rem;
+            position: absolute;
+            left: 0;
+            top: .95rem;
+        }
+        
+        .wrap h3 {
+            padding-bottom: .75rem;
+        }
+        
+        .wrap input {
+            width: 100%;
+            display: block;
+            padding: .75rem.5rem;
+            margin: .6rem 0;
+            box-sizing: border-box;
+            border: none;
+            background: #f6f7fb;
+            font-size: .7rem;
+            outline: none;
+        }
+        
+        .inputs {
+            position: relative;
+        }
+        
+        .wrap button {
+            position: absolute;
+            right: 0;
+            top: 0;
+            padding: .67rem 0;
+            border: none;
+            width: 5rem;
+            background: #1261a4;
+            color: #fff;
+            outline: none;
+        }
+        
+        .wrap .btn {
+            font-size: .85rem;
+            color: #fff;
+            width: 100%;
+            padding: .75rem 0;
+            background:#c8c9cc;
+            text-align: center;
+            margin-top: 3rem;
+        }
+        
+        .popDiv {
+            position: fixed;
+            top: 40%;
+            left: 50%;
+            width: 60vw;
+            padding: .75rem;
+            margin-left: -35vw;
+            border-radius: .1rem;
+            text-align: center;
+            color: #fff;
+            background: rgba(0, 0, 0, .5);
+            opacity: 0;
+            transition: all 1s line;
+            -moz-transition: width 1s;
+            -webkit-transition: width 1s;
+            -o-transition: width 1s;
+            z-index: 9999;
+            font-size: .85rem;
+        }
+        input::-webkit-input-placeholder{
+            color:#CCC;
+        }
+        input::-moz-placeholder{   /* Mozilla Firefox 19+ */
+            color:#CCC;
+        }
+        input:-moz-placeholder{    /* Mozilla Firefox 4 to 18 */
+            color:#CCC;
+        }
+        input:-ms-input-placeholder{  /* Internet Explorer 10-11 */ 
+            color:#CCC;
+        }
+        .active{
+               background: #1261a4 !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="heads">
+            <img src="../../images/back.png" alt="" class="back">
+            <span>游客登录</span>
+        </div>
+        <div class="inputs">
+            <input type="tel" placeholder="请输入手机号码" class="tel" maxlength="11" name="tel">
+            <button id='getCode' onclick="sendCode()">获取验证码</button>
+            <input type="number" placeholder="请输入验证码" class="password" name='password'>
+        </div>
+        <div class="btn" onclick="register()">确定</div>
+    </div>
+</body>
+<script src="./../../libs/jquery-1.11.1.js"></script>
+<script src="./../../js/common.js"></script>
+<script src="../../js/vue.js"></script>
+<script>
+
+    $(".tel,.password").keyup(function(){  
+   if($('.tel').val() !==''&& $('.password').val() !==''){
+   $('.btn').addClass('active')
+   }else{
+    $('.btn').removeClass('active')
+   }
+});
+
+    $(function() {
+        $('.back').on('click', function() {
+            window.history.go(-1)
+        })
+
+    })
+
+    function isMob(value) {
+        var regex = /^0?(13[0-9]|17[03567]|15[012356789]|18[0-9]|14[57])[0-9]{8}$/;
+        return regex.test(value);
+    }
+
+    var swich = false;
+
+    function sendCode() {
+        if (swich) {
+            return
+        }
+        if (!isMob($('.tel').val())) {
+            pop('请输入正确的手机号码')
+            return
+        } else {
+            swich = true;
+            $.ajax({
+                url: common.urls + '/phoneCode/code.do',
+                dataType: 'json',
+                type: 'get',
+                data: {
+                    userName: $('.tel').val(),
+                },
+                success: function(data) {
+                    if (data.status == 10001) {
+                        var second = 60;
+                        var timer = null;
+                        $("#getCode").text(second + "s");
+                        timer = setInterval(function() {
+                            if (second > 1) {
+                                second--;
+                                $("#getCode").text(second + "s");
+                            } else {
+                                clearInterval(timer);
+                                swich = false
+                                $("#getCode").text("获取验证码");
+                            }
+                        }, 1000)
+                    } else {
+                        swich = false
+                        pop(data.msg)
+                    }
+                },
+                error: function() {
+                    swich = false
+                }
+
+            })
+        }
+    }
+
+    function register() {
+        if (!isMob($('.tel').val())) {
+            pop("请输入正确的手机号码", "", "error");
+        } else if (!$('.password').val()) {
+            pop("请输入短信验证码", "", "error")
+        } else {
+            $.ajax({
+                url: common.urls + '/user/login.do',
+                dataType: 'json',
+                type: 'get',
+                data: {
+                    mobile: $('.tel').val(),
+                    code: $('.password').val(),
+                    userType: '2'
+                },
+                success: function(data) {
+                    if (data.status == 10001) {
+                        localStorage.setItem('userInfo', JSON.stringify(data.dataInfo));
+                        // 提取用户信息
+                        // var infoStr = localStorage.getItem('userInfo');
+                        location.href = '../../html/spot_live/index.html'
+                    } else(
+                        pop(data.msg)
+
+                    )
+                },
+                error: function(data) {
+
+                }
+            })
+        }
+
+
+    }
+</script>
+
+</html>

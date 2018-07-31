@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+    <title>直播结束</title>
+    <style>
+     *{
+         margin: 0;
+         padding: 0;
+     }
+     .wrap{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        background: url(./../../images/live_bg.jpg) no-repeat;
+        background-size: 100% 100%;
+     }
+     .contents{
+        text-align: center;
+        font-size: .95rem;
+        color: white;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        margin-top: -4rem;
+        margin-left:-3.9rem;
+         transform:rotate(90deg);
+        -ms-transform:rotate(90deg); /* Internet Explorer 9*/
+        -moz-transform:rotate(90deg); /* Firefox */
+        -webkit-transform:rotate(90deg); /* Safari 和 Chrome */
+        -o-transform:rotate(90deg); /* Opera */
+        filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=1);
+     }
+     .contents img{
+         width: 1.4rem;
+         height: 1.05rem;
+         margin-bottom: .75rem;
+     }
+     .btn{
+        background: none;
+        width:8rem;
+        height: 2.5rem;
+        color: white;
+        border-radius: .38rem;
+        outline: none; 
+        font-size: .7rem;
+        margin-top: 2rem;
+     }
+    </style>
+</head>
+<body>
+      <div class="wrap" id="app" >
+         <div class="contents">
+                 
+                    <img src="../../images/live_end.png" alt="">
+                
+                <div>直播已结束</div>   
+                <button class="btn">返回首页</button>
+         </div>
+      </div>
+</body>
+<script src="./../../libs/flexible.js"></script>
+<script src="./../../js/common.js"></script>
+<script src="../../js/vue.js"></script>
+<script>
+ 
+</script>
+</html>

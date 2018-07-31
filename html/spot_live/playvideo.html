@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="stylesheet" type="text/css" href="./../../css/playvideo.css" />
+
+    <title>视频详情</title>
+</head>
+<style>
+video::-internal-media-controls-download-button {
+	display:none;
+}
+video::-webkit-media-controls-enclosure {
+	overflow:hidden;
+}
+video::-webkit-media-controls-panel {
+	width: calc(100% + 30px); 
+}
+</style>
+
+<body>
+    <div class="videoplay" id="app" v-cloak>
+        <div class="heads">
+            <span class="icon" @click="back">
+                <img src="../../images/back.png" alt="">
+            </span>
+            <span>视频详情</span>
+        </div>
+
+        <video id="video" style="width:100%; height:300px;" controls autoplay="autoplay">
+			
+		</video>
+
+        <div class="titles">
+            <span>{{challenge.title}}</span>
+            <span class="play_i">
+                <img src="../../images/plays.png" alt="">&nbsp;&nbsp;{{challenge.watchCount}}
+            </span>
+            <span class="play_i" style="float: right;margin-top: 7px;">直播时间：{{challenge.liveDate}} {{challenge.liveTime}}</span>
+        </div>
+        <div class="user_name">
+            <img :src="challenge.logoPath==''?'../../images/logos.png':challenge.logoPath" alt="" alt="" class="pic">
+            <span class="name">{{challenge.nickName}}</span>
+          
+        </div>
+
+    </div>
+    </div>
+
+
+    <script src="./../../libs/flexible.js"></script>
+    <script src="./../../libs/jquery-1.11.1.js"></script>
+    <script src="../../js/common.js"></script>
+    <script src="../../js/vue.js"></script>
+    <script src="../../js/h5connect.js"></script>
+</body>
+<script>
+    function getQueryString(name) {
+        var result = window.location.search.match(new RegExp("[\?\&]" + name + "=([^\&]+)", "i"));
+        if (result == null || result.length < 1) {
+            return "";
+        }
+        return result[1];
+    }
+
+    var tipiv = new Vue({
+        el: '#app',
+        data: {
+            challenge: '',
+            areanumber: '',
+
+        },
+        methods: {
+            back: function() {
+
+                window.history.go(-1)
+            },
+            tops: function(item) {
+                location.href = '../spotvideo/play.html?id=' + item.id
+            }
+        },
+        mounted: function() {
+
+            $.ajax({
+                url: common.urls + '/live/detail.do',
+                dataType: 'json',
+                type: 'get',
+                data: {
+                    id: getQueryString("id"),
+                },
+                success: function(data) {
+                    if (data.status == 10001) {
+                        tipiv.challenge = data.dataInfo.info
+
+                        var videoUrl = data.dataInfo.info.videoUrl != null ? data.dataInfo.info
+                            .videoUrl : data.dataInfo.info.fileUrl;
+                        $("#video").html('<source src="'+videoUrl+'"  type="video/mp4">');
+                        var url = common.urls + '/live/saveWatch.do';
+                        $.post(url, {
+                            type: 3,
+                            userId: common.data.info.id,
+                            relId: tipiv.challenge.id
+                        }, function(ret) {
+
+                        });
+                    } else(
+                        pop(data.msg)
+                    )
+                },
+                error: function(data) {
+
+                }
+            })
+        },
+
+    })
+</script>
+
+</html>

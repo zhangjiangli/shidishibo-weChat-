@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="./../../css/detailed.css" />
+    <script src="./../../libs/flexible.js"></script>
+    <title>详情</title>
+</head>
+
+<body>
+    <div class="wrap" id="app" v-cloak>
+        <div class="heads">
+            <span class="icon" @click="back">
+                <img src="../../images/back.png" alt="">
+            </span>
+            <span>详情</span>
+        </div>
+        <div class="contents">
+            <span>蔷薇国际盛世开业蔷薇国际盛世开业蔷薇国际盛世开 </span>
+            <div class="pic"><img src="./../../images/fish.jpg" class="pics"> </div>
+            <span>城市智慧社区城市智慧社区</span>
+            <p class="p_cont">蔷薇 国际盛 际盛世开业蔷薇国际 世开业蔷薇国际盛世开</p>
+        </div>
+    </div>
+</body>
+<script src="./../../libs/jquery-1.11.1.js"></script>
+<script src="./../../js/common.js"></script>
+<script src="../../js/vue.js"></script>
+<script>
+    var tipiv = new Vue({
+        el: '#app',
+        data: {
+            challenge: '',
+        },
+        methods: {
+            back: function() {
+                window.history.go(-1)
+            },
+        },
+        mounted: function() {
+
+            $.ajax({
+                url: common.urls + '/msgPush/detail.do',
+                dataType: 'json',
+                type: 'get',
+                data: {
+                    id: common.data.info.id,
+                },
+                success: function(data) {
+                    tipiv.challenge = data.dataInfo.info
+                    console.log(tipiv.challenge)
+
+                },
+                error: function(data) {
+
+                }
+            })
+        },
+
+    })
+</script>
+
+</html>

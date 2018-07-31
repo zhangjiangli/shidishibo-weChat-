@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="./../../css/message.css" />
+    <script src="./../../libs/flexible.js"></script>
+    <title>消息中心</title>
+</head>
+
+<body>
+    <div class="wrap" id="app" v-cloak>
+        <div class="heads">
+            <span class="icon" @click='back'>
+                <img src="../../images/back.png" alt="">
+            </span>
+            <span>消息中心</span>
+        </div>
+
+
+        <div class="titles" v-for='item in challenge' @click='news(item)' v-show='item.type==1'>
+            <img src="../../images/email.png" alt="" class="sign">
+            <div class="subject">
+                <span>{{item.title}}</span>
+                <p class="newtime">{{item.createTime}}</p>
+            </div>
+        </div>
+
+    </div>
+</body>
+<script src="./../../libs/jquery-1.11.1.js"></script>
+<script src="./../../js/common.js"></script>
+<script src="../../js/vue.js"></script>
+<script>
+    var tipiv = new Vue({
+        el: '#app',
+        data: {
+            challenge: '',
+        },
+        methods: {
+            back: function() {
+                history.go(-1)
+            },
+            news: function(item) {
+                location.href = common.urls + item.content.replace("msgPush.html","wcmsgPush.html")
+            }
+        },
+        mounted: function() {
+            $.ajax({
+                url: common.urls + '/msgPush/list.do',
+                dataType: 'json',
+                type: 'get',
+                data: {
+                    userId: common.data.info.id,
+                },
+                success: function(data) {
+                    tipiv.challenge = data.dataInfo.info
+                    console.log(tipiv.challenge)
+                },
+                error: function(data) {
+
+                }
+            })
+        },
+
+    })
+</script>
+
+</html>

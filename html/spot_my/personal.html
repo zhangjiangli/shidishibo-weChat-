@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="./../../css/personal.css" />
+    <script src="./../../libs/flexible.js"></script>
+    <title>个人中心</title>
+</head>
+
+<body>
+    <div class="mys" id="app" v-cloak>
+        <div class="title">
+            个人中心
+        </div>
+
+        <div class="head_pic">
+            <div class="upload_pic">
+                <!--    <img :src="challenge.logoPath==''?'../../images/logos.png':challenge.logoPath" alt="" class="pic">
+                <form id="head-logo-form" method="post" enctype="multipart/form-data">
+                    <input type="file" name="image" onchange="changeHeadLogo(this,3)" class="head-logo-input" class="upload"/>
+                </form> -->
+                <img :src="challenge.logoPath ? challenge.logoPath: '../../images/logos.png'" alt="" class='addto_img pic'>
+                <form id="form" method="post" enctype="multipart/form-data">
+                    <input type="file" id="fileId" name="image" onchange="changeHeadLogo(this,type)" class="head-logo-input upload" id="name" />
+                </form>
+            </div>
+            <span class="name"> {{challenge.loginName}}</span>
+            <span class="department"> {{challenge.fullName}}</span>
+        </div>
+        <div class="set">
+            <ul class="set_li">
+                <a href="./../spot_my/feedback .html">
+                    <li>
+                        <span>意见反馈</span>
+                        <span class="icons">
+                            <img src="../../images/you.png" alt="">
+                        </span>
+                    </li>
+                </a>
+                <a href="./../spot_my/setup.html">
+                    <li>
+                        <span>更多设置</span>
+                        <span class="icons">
+                            <img src="../../images/you.png" alt=""> </span>
+                    </li>
+                </a>
+            </ul>
+        </div>
+        <div>
+
+        </div>
+        <!-- 底部导航 -->
+        <div class="foot_btn">
+            <a href="../spot_live/index.html">
+                <div class="live_btn">
+                    <!-- <img src="../../images/b_line.png" alt=""> -->
+                    <div class="lives"></div>
+                    <span>在线直播</span>
+                </div>
+            </a>
+            <a href="../spotvideo/myplay.html">
+                <div class="play_btn">
+                    <!-- <img src="../../images/h_play.png" alt="" class="a"> -->
+                    <div class="plays"></div>
+                    <span>视频</span>
+                </div>
+            </a>
+            <a href="../spot_my/personal.html">
+                <div class="my_btn active">
+                    <!-- <img src="../../images/h_my.png" alt=""> -->
+                    <div class="mys"></div>
+                    <span>我的</span>
+                </div>
+            </a>
+        </div>
+    </div>
+    <script src="./../../libs/jquery-1.11.1.js"></script>
+    <script src="./../../js/common.js"></script>
+    <script src="../../js/vue.js"></script>
+</body>
+
+<script type="text/javascript">
+    $('.foot_btn>div').on('click', function() {
+        $(this).addClass('active').siblings().removeClass('active')
+
+    })
+    var tipiv = new Vue({
+        el: '#app',
+        data: {
+            challenge: '',
+        },
+        methods: {},
+        mounted: function() {
+            $.ajax({
+                url: common.urls + '/user/info.do',
+                dataType: 'json',
+                type: 'get',
+                data: {
+                    id: common.data.info.id,
+                },
+                success: function(data) {
+                    if (data.status == 10001) {
+                        tipiv.challenge = data.dataInfo.info
+                            /*    console.log(tipiv.challenge) */
+                    } else {
+                        pop(data.msg)
+                    }
+                },
+                error: function(data) {
+
+                }
+            })
+        },
+
+    })
+
+    function changeHeadLogo(_this, type) {
+        var form = new FormData($(_this).closest("form")[0]);
+        $.ajax({
+                url: common.urls + '/upload/fileUploadByByte.do?type=2',
+                type: 'post',
+                dataType: 'json',
+                contentType: false,
+                processData: false,
+                data: form
+            })
+            .done(function(data) {
+                if (data.status === 10001) {
+                    $(".addto_img.pic")[0].src = data.dataInfo.path;
+                    $.ajax({
+                            url: common.urls + '/user/uplogoPath.do',
+                            dataType: 'json',
+                            type: 'post',
+                            data: { 
+                                id: common.data.info.id,
+                                logoPath: $(".addto_img.pic")[0].src,
+                            },
+                        })
+                        .done(function(data) {
+                            if (data.status === 10001) {
+                                // console.log(data.dataInfo)
+                                tipiv.challenge = data.dataInfo.info
+                            } else {
+                                pop(data.msg)
+                            }
+                        })
+
+                } else {
+                    pop(data.msg)
+                }
+            })
+    }
+</script>
+
+</html>
